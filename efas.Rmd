@@ -1,0 +1,73 @@
+---
+title: "Shiny APP"
+author: "Shashi Chandra''"
+date: "4 February 2017"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r asas, echo=FALSE, warning=FALSE, message=FALSE}
+library(plotly)
+library(tidyr)
+library(webshot)
+library(datasets)
+```
+
+## The Regression Project
+###Why Shiny ?
+ - This application helps in deploying live projects.
+ - This will helps looking through the dataset easier with lesser computations.
+
+###About the Project:
+ - The project aims at highlighting the relation in between the various factors in mtcars dataset as they are present and are related to each other .
+
+## How to Use:
+
+###TO use The Shiny App:
+- Select one of the factors out of hp, cyl, wt which are going to be the predictors.
+- Select the another one which is going to be predicted or with whom relation is to be compared.
+- Click the submit button to submit your queries to the server.
+ wait for the output ...
+
+## The output parts:
+First we get to see the data itself.
+```{r gd, comment=""}
+head(mtcars[,c('mpg','hp','wt','cyl')])
+
+```
+
+## The regression Part
+```{r regmod, comment=""}
+#Supposing you selected mpg(y) vs cyl(x)
+mod<-lm(mpg~cyl, data = mtcars)
+summary(mod)
+
+```
+
+## The plot in Between Variables
+```{r twey, warning=FALSE, message=FALSE}
+plot_ly(mtcars, x = mtcars$wt, y = mtcars$mpg, mode = "markers",
+color = as.factor(mtcars$cyl), size = mtcars$hp)
+
+
+```
+
+## The Plot in Between all the  variables:
+```{r affa ,warning=FALSE, message=FALSE}
+plot(mtcars[,c('mpg','hp','cyl','wt')], pch=8, color='red')
+
+```
+
+## The plot in the shiny app:
+```{r kjbjac, warning=FALSE,message=FALSE, comment=""}
+plot(mtcars$mpg,mtcars$cyl,
+         xlab = "Miles Per Gallon", ylab = "Cylinders" ,  main = "Scatter Plot of Predicted and Predictor Variables", pch = 9, 
+         col = "red", cex = 1)
+```
+
+
+## Thank YOu!
